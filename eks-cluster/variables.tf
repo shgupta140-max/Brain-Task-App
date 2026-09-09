@@ -70,8 +70,8 @@ variable "cluster_admin_principals" {
   default     = ["arn:aws:iam::409415529933:user/terraform-user", "arn:aws:iam::409415529933:root"]
 }
 
-variable "jenkins_admin_principal_arn" {
+variable "code_build_principal_arn" {
   description = "IAM principal ARN for Jenkins admin access to the EKS cluster"
   type        = string
-  default     = "arn:aws:iam::409415529933:role/Jenkins-EC2-Profile"
+  default     = "arn:aws:iam::409415529933:role/service-role/codebuild-Mindtrack-App-service-role"
 }

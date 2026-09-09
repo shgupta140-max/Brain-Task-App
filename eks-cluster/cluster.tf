@@ -65,9 +65,9 @@ resource "aws_eks_access_entry" "cluster_admin" {
   type          = "STANDARD"
 }
 
-resource "aws_eks_access_entry" "jenkins_admin" {
+resource "aws_eks_access_entry" "code_build_role" {
   cluster_name  = aws_eks_cluster.mindtrack.name
-  principal_arn = var.jenkins_admin_principal_arn
+  principal_arn = var.code_build_principal_arn
   type          = "STANDARD"
 }
 
@@ -85,16 +85,16 @@ resource "aws_eks_access_policy_association" "cluster_admin" {
   depends_on = [aws_eks_access_entry.cluster_admin]
 }
 
-resource "aws_eks_access_policy_association" "jenkins_admin" {
+resource "aws_eks_access_policy_association" "code_build_role" {
   cluster_name  = aws_eks_cluster.mindtrack.name
   policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
-  principal_arn = aws_eks_access_entry.jenkins_admin.principal_arn
+  principal_arn = aws_eks_access_entry.code_build_role.principal_arn
 
   access_scope {
     type = "cluster"
   }
 
-  depends_on = [aws_eks_access_entry.jenkins_admin]
+  depends_on = [aws_eks_access_entry.code_build_role]
 }
 
 

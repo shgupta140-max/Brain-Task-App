@@ -61,3 +61,15 @@ resource "aws_eks_addon" "ebs_csi_driver" {
   service_account_role_arn = aws_iam_role.ebs_csi_driver.arn
   depends_on               = [aws_eks_node_group.mindtrack]
 }
+
+resource "aws_eks_addon" "cloudwatch_observability" {
+  # Replace 'aws_eks_cluster.this.name' with your actual EKS cluster resource reference
+  cluster_name             = aws_eks_cluster.mindtrack.name
+  addon_name               = "amazon-cloudwatch-observability"
+  service_account_role_arn = aws_iam_role.cloudwatch_observability_role.arn
+
+  # Ensures the addon stays installed even if Terraform is destroyed,
+  # which is often preferred for observability tooling.
+  preserve = true
+}
+
