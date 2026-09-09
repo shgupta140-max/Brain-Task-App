@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mindtrack-deployment
+  namespace: mindtrack
+  labels:
+    app: mindtrack
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mindtrack
+  template:
+    metadata:
+      labels:
+        app: mindtrack
+    spec:
+      containers:
+      - name: mindtrack
+        image: 409415529933.dkr.ecr.ap-south-1.amazonaws.com/shgupta140/brain-task:latest
+        ports:
+        - containerPort: 3000
