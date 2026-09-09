@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 RUN rm -rf *.html
 COPY ./dist .
